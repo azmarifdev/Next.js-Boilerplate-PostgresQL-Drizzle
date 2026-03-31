@@ -24,6 +24,11 @@ This project follows Conventional Commits.
 
 `<type>(optional-scope): <short description>`
 
+For breaking changes, use `!` or a `BREAKING CHANGE:` footer:
+
+- `feat(api)!: replace legacy auth endpoint`
+- `feat(api): replace auth endpoint` + `BREAKING CHANGE: ...`
+
 ### Common Types
 
 - `feat`: new feature
@@ -46,6 +51,21 @@ This project follows Conventional Commits.
 - `updated stuff`
 - `fixing bug`
 - `new feature`
+
+## Automated Release Flow
+
+This repository uses `release-please` with Conventional Commits.
+
+1. Push/merge commits to `main` or `master`.
+2. GitHub Action automatically updates/opens a Release PR.
+3. When that PR is merged, version, tag, changelog, and GitHub release notes are created automatically.
+
+## GitHub Automation Checks
+
+- Commit messages are validated on PRs.
+- PR titles must follow semantic format (for example: `feat(auth): add login guard`).
+- PR labels are added automatically from changed files.
+- Dependency updates are scanned and safe Dependabot updates can auto-merge.
 
 ## Branch & PR Notes
 

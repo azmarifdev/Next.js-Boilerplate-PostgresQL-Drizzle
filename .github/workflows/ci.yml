@@ -6,10 +6,17 @@ on:
       - "**"
   push:
     branches:
-      - main
-      - master
-      - develop
+      - "**"
+    tags-ignore:
+      - "v*.*.*"
   workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
 
 jobs:
   quality:
@@ -52,7 +59,7 @@ jobs:
     name: Playwright E2E
     needs: quality
     runs-on: ubuntu-latest
-    if: github.event_name != 'pull_request'
+    if: github.event_name == 'push' && (github.ref_name == 'main' || github.ref_name == 'master' || github.ref_name == 'develop')
     env:
       NEXT_PUBLIC_APP_NAME: Nextjs Starter Template
       APP_URL: ${{ secrets.APP_URL }}
