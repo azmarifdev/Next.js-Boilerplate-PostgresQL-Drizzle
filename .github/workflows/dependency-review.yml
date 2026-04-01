@@ -14,11 +14,38 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Detect dependency file changes
+        id: dep-changes
+        uses: tj-actions/changed-files@v45
+        with:
+          files: |
+            package.json
+            package-lock.json
+            npm-shrinkwrap.json
+            yarn.lock
+            pnpm-lock.yaml
+            bun.lock
+            bun.lockb
+            **/package.json
+            **/package-lock.json
+            **/npm-shrinkwrap.json
+            **/yarn.lock
+            **/pnpm-lock.yaml
+            **/bun.lock
+            **/bun.lockb
 
       - name: Dependency review
+        if: steps.dep-changes.outputs.any_changed == 'true'
         uses: actions/dependency-review-action@v4
         with:
           # GitHub can take a short time to generate dependency snapshots
           # for new commits; retrying avoids transient "No snapshots found" failures.
           retry-on-snapshot-warnings: true
           retry-on-snapshot-warnings-timeout: 600
+
+      - name: Skip (no dependency file changes)
+        if: steps.dep-changes.outputs.any_changed != 'true'
+        run: echo "No dependency manifest/lockfile changes detected. Skipping dependency review."
