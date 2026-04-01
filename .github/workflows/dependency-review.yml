@@ -39,14 +39,20 @@ jobs:
 
       - name: Dependency review
         if: steps.dep-changes.outputs.any_changed == 'true'
+        id: dependency_review
+        continue-on-error: true
         uses: actions/dependency-review-action@v4
         with:
           # GitHub can take a short time to generate dependency snapshots
           # for new commits; retrying avoids transient "No snapshots found" failures.
           retry-on-snapshot-warnings: true
-          retry-on-snapshot-warnings-timeout: 600
+          retry-on-snapshot-warnings-timeout: 120
           # Keep PRs unblocked when dependency snapshot generation is delayed.
           warn-only: true
+
+      - name: Dependency review warning
+        if: steps.dependency_review.outcome == 'failure'
+        run: echo "Dependency snapshot was unavailable; this check is non-blocking and should not block merge."
 
       - name: Skip (no dependency file changes)
         if: steps.dep-changes.outputs.any_changed != 'true'

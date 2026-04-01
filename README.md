@@ -300,7 +300,7 @@ Configured workflows:
 - `stale.yml`: marks/closes stale issues and PRs.
 - `release-please.yml`: automates changelog, release PR, version/tag, GitHub release notes.
 - `codeql.yml`: security scan for JavaScript/TypeScript.
-- `codehawk.yml`: weekly/manual CodeHawk scan.
+- `codehawk.yml`: weekly/manual CodeHawk scan (report-focused, non-blocking).
 - `package-manager-consistency.yml`: manual lockfile consistency verification for npm/yarn/pnpm (and bun when lockfile exists).
 - `bun-compatibility.yml`: manual Bun verification flow (`bun install`, lint, typecheck, vitest, build).
 
