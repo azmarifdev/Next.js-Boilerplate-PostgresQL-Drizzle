@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.14](https://github.com/azmarifdev/Next.js-Boilerplate-PostgresQL-Drizzle/compare/Next.js-Boilerplate-PostgresQL-Drizzle-v0.1.13...Next.js-Boilerplate-PostgresQL-Drizzle-v0.1.14) (2026-04-25)
+
+
+### Refactoring
+
+* **auth:** enforce better-auth single path and guard dev-auth-fa… ([c9b2d01](https://github.com/azmarifdev/Next.js-Boilerplate-PostgresQL-Drizzle/commit/c9b2d01d163a3f3c4818e5dc4595a028fec973ea))
+
 ## [0.1.13](https://github.com/azmarifdev/Next.js-Boilerplate-PostgresQL-Drizzle/compare/Next.js-Boilerplate-PostgresQL-Drizzle-v0.1.12...Next.js-Boilerplate-PostgresQL-Drizzle-v0.1.13) (2026-04-25)
 
 
