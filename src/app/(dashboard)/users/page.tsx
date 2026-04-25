@@ -1,7 +1,7 @@
 import { getTranslations } from "next-intl/server";
 
 import { EmptyState } from "@/components/common/empty-state";
-import { isFeatureEnabled } from "@/lib/config/feature-flags";
+import { isFeatureEnabled } from "@/lib/config/featureFlags";
 import { UserTable } from "@/modules/user/components/UserTable";
 
 export default async function UsersPage() {

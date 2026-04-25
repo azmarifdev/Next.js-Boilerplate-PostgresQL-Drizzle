@@ -12,9 +12,9 @@ import type { Route } from "next";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 
-import { useAuth } from "@/hooks/use-auth.hook";
-import { isFeatureEnabled } from "@/lib/config/feature-flags";
+import { useAuth } from "@/hooks/useAuth";
 import { featureRegistry } from "@/lib/config/feature-registry";
+import { isFeatureEnabled } from "@/lib/config/featureFlags";
 
 const links = [
   { href: "/dashboard", key: "overviewNav", icon: LayoutDashboard },

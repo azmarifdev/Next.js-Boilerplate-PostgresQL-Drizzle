@@ -1,28 +1,29 @@
 "use client";
 
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useMemo } from "react";
-import { useDispatch, useSelector } from "react-redux";
 
 import { authService } from "@/modules/auth/services/auth.service";
 import { useToast } from "@/providers/toast.provider";
-import { AppDispatch } from "@/store";
-import { RootState } from "@/store";
-import { clearAuthUser } from "@/store/slices/authSlice";
 
 export function useAuth() {
-  const dispatch = useDispatch<AppDispatch>();
   const queryClient = useQueryClient();
   const { notify } = useToast();
-  const { user, isLoading } = useSelector((state: RootState) => state.auth);
+  const meQuery = useQuery({
+    queryKey: ["auth", "me"],
+    queryFn: authService.getMe,
+    retry: false
+  });
 
+  const user = meQuery.data ?? null;
+  const isLoading = meQuery.isLoading;
   const isAuthenticated = useMemo(() => Boolean(user), [user]);
 
   const logoutMutation = useMutation({
     mutationFn: authService.logout,
-    onSuccess: () => {
-      dispatch(clearAuthUser());
-      void queryClient.invalidateQueries({ queryKey: ["auth", "me"] });
+    onSuccess: async () => {
+      queryClient.setQueryData(["auth", "me"], null);
+      await queryClient.invalidateQueries({ queryKey: ["auth", "me"] });
       notify("success", "You have been logged out");
     },
     onError: (error) => {

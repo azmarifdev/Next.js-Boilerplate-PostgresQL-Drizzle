@@ -7,7 +7,7 @@ import { useTranslations } from "next-intl";
 import { LangSwitcher } from "@/components/layout/lang-switcher";
 import { ThemeSwitcher } from "@/components/layout/theme-switcher";
 import { Button } from "@/components/ui/button";
-import { useAuth } from "@/hooks/use-auth.hook";
+import { useAuth } from "@/hooks/useAuth";
 import { APP_NAME } from "@/lib/config/constants";
 
 export function Navbar() {

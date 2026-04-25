@@ -1,18 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import { shouldUseSecureCookies } from "@/lib/auth/cookie-security";
 import { hasPermission } from "@/lib/auth/rbac";
 import { verifySessionToken } from "@/lib/auth/session";
 import { AUTH_COOKIE_NAME } from "@/lib/config/constants";
-import { isFeatureEnabled } from "@/lib/config/feature-flags";
-import { findFeatureByPath } from "@/lib/config/feature-registry";
-import { validateRuntimeConfig } from "@/lib/config/validate";
-import {
-  getOrCreateRequestId,
-  REQUEST_ID_HEADER,
-  setRequestIdHeader
-} from "@/lib/observability/request-id";
 
+// This proxy only protects routes by redirecting unauthenticated or unauthorized users.
 const protectedRoutes = ["/dashboard", "/projects", "/tasks", "/ecommerce", "/billing", "/users"];
 const authRoutes = ["/login", "/register"];
 
@@ -33,73 +25,39 @@ const routePermissions: Record<
   "/billing": "billing:read"
 };
 
-function attachRequestId(response: NextResponse, requestId: string): NextResponse {
-  setRequestIdHeader(response, requestId);
-  return response;
-}
-
-function isRouteFeatureDisabled(pathname: string): boolean {
-  const feature = findFeatureByPath(pathname);
-  if (feature) {
-    return !isFeatureEnabled(feature.key);
-  }
-
-  return false;
+function isMatchedRoute(pathname: string, routes: string[]): boolean {
+  return routes.some((route) => pathname === route || pathname.startsWith(`${route}/`));
 }
 
 export async function proxy(request: NextRequest) {
-  validateRuntimeConfig();
-  const requestId = getOrCreateRequestId(request.headers);
-  const requestHeaders = new Headers(request.headers);
-  requestHeaders.set(REQUEST_ID_HEADER, requestId);
-
-  const token = request.cookies.get(AUTH_COOKIE_NAME)?.value;
   const { pathname } = request.nextUrl;
-
-  const isProtected = protectedRoutes.some(
-    (route) => pathname === route || pathname.startsWith(`${route}/`)
-  );
-  const isAuthRoute = authRoutes.includes(pathname);
-
-  if (isRouteFeatureDisabled(pathname)) {
-    return attachRequestId(NextResponse.redirect(new URL("/dashboard", request.url)), requestId);
-  }
-
+  const token = request.cookies.get(AUTH_COOKIE_NAME)?.value;
   const session = token ? await verifySessionToken(token) : null;
+
+  const isProtectedRoute = isMatchedRoute(pathname, protectedRoutes);
+  const isAuthRoute = authRoutes.includes(pathname);
   const isSignedIn = Boolean(session);
 
-  if (isProtected && !isSignedIn) {
-    return attachRequestId(NextResponse.redirect(new URL("/login", request.url)), requestId);
+  if (isProtectedRoute && !isSignedIn) {
+    return NextResponse.redirect(new URL("/login", request.url));
   }
 
-  if (isProtected && session) {
+  if (isProtectedRoute && session) {
     const basePath = protectedRoutes.find(
       (route) => pathname === route || pathname.startsWith(`${route}/`)
     );
     const requiredPermission = basePath ? routePermissions[basePath] : null;
 
     if (requiredPermission && !hasPermission(session.role, requiredPermission)) {
-      return attachRequestId(NextResponse.redirect(new URL("/dashboard", request.url)), requestId);
+      return NextResponse.redirect(new URL("/dashboard", request.url));
     }
   }
 
   if (isAuthRoute && isSignedIn) {
-    return attachRequestId(NextResponse.redirect(new URL("/dashboard", request.url)), requestId);
+    return NextResponse.redirect(new URL("/dashboard", request.url));
   }
 
-  if (token && !isSignedIn) {
-    const response = NextResponse.next({ request: { headers: requestHeaders } });
-    response.cookies.set(AUTH_COOKIE_NAME, "", {
-      httpOnly: true,
-      secure: shouldUseSecureCookies(),
-      sameSite: "strict",
-      expires: new Date(0),
-      path: "/"
-    });
-    return attachRequestId(response, requestId);
-  }
-
-  return attachRequestId(NextResponse.next({ request: { headers: requestHeaders } }), requestId);
+  return NextResponse.next();
 }
 
 export const config = {
@@ -111,7 +69,6 @@ export const config = {
     "/billing/:path*",
     "/users/:path*",
     "/login",
-    "/register",
-    "/api/:path*"
+    "/register"
   ]
 };

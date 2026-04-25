@@ -1,8 +1,8 @@
 import { getTranslations } from "next-intl/server";
 
 import { EmptyState } from "@/components/common/empty-state";
-import { isFeatureEnabled } from "@/lib/config/feature-flags";
-import { EcommercePanel } from "@/modules/ecommerce/components/EcommercePanel";
+import { isFeatureEnabled } from "@/lib/config/featureFlags";
+import { EcommercePanel } from "@/modules/optional/ecommerce/components/EcommercePanel";
 
 export default async function EcommercePage() {
   const t = await getTranslations("dashboard");

@@ -30,8 +30,9 @@ export const env = createEnv({
     NEXT_PUBLIC_APP_NAME: appName,
     NEXT_PUBLIC_API_BASE_URL: optionalString,
     NEXT_PUBLIC_SITE_URL: optionalUrl,
-    NEXT_PUBLIC_BACKEND_MODE: z.enum(["external", "internal"]).default("external"),
+    NEXT_PUBLIC_BACKEND_MODE: z.enum(["external", "internal"]).default("internal"),
     NEXT_PUBLIC_AUTH_PROVIDER: z.enum(["better-auth", "custom"]).default("better-auth"),
+    NEXT_PUBLIC_ENABLE_REDUX: z.enum(["true", "false"]).default("false"),
     NEXT_PUBLIC_FEATURE_ECOMMERCE: optionalBooleanString,
     NEXT_PUBLIC_FEATURE_BILLING: optionalBooleanString,
     NEXT_PUBLIC_FEATURE_ADMIN: optionalBooleanString
@@ -47,6 +48,7 @@ export const env = createEnv({
     NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
     NEXT_PUBLIC_BACKEND_MODE: process.env.NEXT_PUBLIC_BACKEND_MODE,
     NEXT_PUBLIC_AUTH_PROVIDER: process.env.NEXT_PUBLIC_AUTH_PROVIDER,
+    NEXT_PUBLIC_ENABLE_REDUX: process.env.NEXT_PUBLIC_ENABLE_REDUX,
     NEXT_PUBLIC_FEATURE_ECOMMERCE: process.env.NEXT_PUBLIC_FEATURE_ECOMMERCE,
     NEXT_PUBLIC_FEATURE_BILLING: process.env.NEXT_PUBLIC_FEATURE_BILLING,
     NEXT_PUBLIC_FEATURE_ADMIN: process.env.NEXT_PUBLIC_FEATURE_ADMIN

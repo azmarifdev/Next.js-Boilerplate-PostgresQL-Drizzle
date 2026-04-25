@@ -1,19 +1,43 @@
 # Auth Flow
 
-## Default Mode
+## Default Path
+
+Default authentication path is Better Auth:
 
 - `NEXT_PUBLIC_AUTH_PROVIDER=better-auth`
-- Auth endpoints live at `src/app/api/v1/auth/*`
-- Client auth provider is `src/lib/auth/better-auth.provider.ts`
+- Backend mode expected as `internal` for local/full-stack flow
 
-## Optional Custom Mode
+## Optional Path
+
+Custom auth mode is supported but optional:
 
 - `NEXT_PUBLIC_AUTH_PROVIDER=custom`
-- Internal Better Auth API routes are disabled
-- Custom mode is reserved for external/custom integration
 
-## Session
+## Route Surface
 
-- Cookie name: `auth_token`
-- Session token signing uses `AUTH_SESSION_SECRET` or `AUTH_SESSION_SECRETS`
-- Demo auth fallback is disabled unless `ALLOW_DEMO_AUTH=true`
+Versioned auth endpoints:
+
+- `POST /api/v1/auth/login`
+- `POST /api/v1/auth/register`
+- `GET /api/v1/auth/me`
+- `POST /api/v1/auth/logout`
+- `POST /api/v1/auth/refresh`
+
+## Session Model
+
+- Session token is issued on login/register
+- Token is stored in secure HTTP-only cookie
+- `proxy.ts` enforces route protection
+
+## Security Controls
+
+- Same-origin checks on sensitive auth operations
+- Auth route rate limiting
+- Runtime configuration guardrails
+
+## Development Toggles
+
+- `ALLOW_DEMO_AUTH` (default `false`)
+- `ALLOW_INSECURE_DEV_AUTH` (default `false`)
+
+Both are opt-in only.

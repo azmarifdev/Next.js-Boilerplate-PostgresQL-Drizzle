@@ -7,7 +7,7 @@ import { useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { resolveApiEndpoint } from "@/lib/config/runtime";
-import { useAuthForm } from "@/modules/auth/hooks/use-auth-form.hook";
+import { useAuthForm } from "@/modules/auth/hooks/useAuthForm";
 
 interface AuthFormProps {
   mode: "login" | "register";

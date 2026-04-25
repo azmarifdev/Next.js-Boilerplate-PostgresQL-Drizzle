@@ -5,7 +5,6 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
 
 import type { AuthPayload } from "@/modules/auth/auth.types";
 import {
@@ -16,8 +15,6 @@ import {
 } from "@/modules/auth/auth.validation";
 import { authService } from "@/modules/auth/services/auth.service";
 import { useToast } from "@/providers/toast.provider";
-import type { AppDispatch } from "@/store";
-import { setAuthUser } from "@/store/slices/authSlice";
 
 interface UseAuthFormOptions {
   mode: "login" | "register";
@@ -25,7 +22,6 @@ interface UseAuthFormOptions {
 
 export function useAuthForm({ mode }: UseAuthFormOptions) {
   const router = useRouter();
-  const dispatch = useDispatch<AppDispatch>();
   const queryClient = useQueryClient();
   const { notify } = useToast();
   const [serverError, setServerError] = useState<string>("");
@@ -44,7 +40,7 @@ export function useAuthForm({ mode }: UseAuthFormOptions) {
       return mode === "login" ? authService.login(payload) : authService.register(payload);
     },
     onSuccess: async (response) => {
-      dispatch(setAuthUser(response.user));
+      queryClient.setQueryData(["auth", "me"], response.user);
       await queryClient.invalidateQueries({ queryKey: ["auth", "me"] });
       notify(
         "success",

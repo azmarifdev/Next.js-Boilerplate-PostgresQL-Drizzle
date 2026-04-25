@@ -1,4 +1,4 @@
-import type { FeatureFlag } from "@/lib/config/feature-flags";
+import type { FeatureFlag } from "@/lib/config/featureFlags";
 import type { Permission } from "@/types/auth";
 
 export interface FeatureDefinition {

@@ -12,9 +12,12 @@ export interface AuthProvider {
   refreshToken(): Promise<{ refreshed: boolean }>;
 }
 
-const providers: Record<typeof appConfig.authProvider, AuthProvider> = {
-  "better-auth": betterAuthProvider,
-  custom: customAuthProvider
-};
+function resolveAuthProvider(): AuthProvider {
+  if (appConfig.authProvider === "custom") {
+    return customAuthProvider;
+  }
 
-export const authProvider: AuthProvider = providers[appConfig.authProvider];
+  return betterAuthProvider;
+}
+
+export const authProvider: AuthProvider = resolveAuthProvider();
