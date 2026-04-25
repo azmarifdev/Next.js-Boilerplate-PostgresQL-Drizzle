@@ -27,7 +27,10 @@ function collectErrors(): string[] {
 }
 
 export function validateRuntimeConfig(): void {
-  if (validated || process.env.NODE_ENV === "test") {
+  const isBuildPhase = process.env.NEXT_PHASE === "phase-production-build";
+  const skipValidation = process.env.SKIP_RUNTIME_VALIDATION === "true";
+
+  if (validated || process.env.NODE_ENV === "test" || isBuildPhase || skipValidation) {
     return;
   }
 
