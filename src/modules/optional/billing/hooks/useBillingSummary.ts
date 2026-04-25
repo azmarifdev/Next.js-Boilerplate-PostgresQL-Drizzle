@@ -2,12 +2,12 @@
 
 import { useQuery } from "@tanstack/react-query";
 
-import { ecommerceService } from "@/modules/ecommerce/services/ecommerce.service";
+import { billingService } from "@/modules/optional/billing/services/billing.service";
 
-export function useEcommerceSummary() {
+export function useBillingSummary() {
   const query = useQuery({
-    queryKey: ["ecommerce", "summary"],
-    queryFn: ecommerceService.summary
+    queryKey: ["billing", "summary"],
+    queryFn: billingService.summary
   });
 
   return {

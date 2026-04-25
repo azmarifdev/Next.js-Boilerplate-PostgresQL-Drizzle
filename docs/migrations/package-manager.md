@@ -1,69 +1,34 @@
-# Package Manager Policy and Migration Guide
+# Package Manager Migration Notes
 
-Use this guide for two cases:
+## Current Standard
 
-1. Working in this repository with npm/pnpm/yarn/bun support
-2. Migrating your fork to a single canonical package manager policy
+This project standardizes on `pnpm`.
 
-## Current Baseline in This Template
+## Required Files
 
-- `packageManager` field is intentionally unset to allow npm/pnpm/yarn/bun
-- CI quality jobs run via npm
-- Lockfile consistency workflow validates npm/pnpm/yarn (and bun if bun lockfile exists)
+- `package.json`
+- `pnpm-lock.yaml`
 
-## Local Usage (Any Supported Manager)
+## CI Behavior
 
-Use one manager per local workflow session:
+CI uses frozen lockfile installs. Any dependency change must include updated `pnpm-lock.yaml`.
 
-- npm: `npm ci`
-- pnpm: `pnpm install --frozen-lockfile`
-- yarn: `yarn install --frozen-lockfile --non-interactive`
-- bun: `bun install --frozen-lockfile`
+## Local Commands
 
-If dependencies change, keep lockfiles consistent before opening PR.
+```bash
+pnpm install
+pnpm run lint
+pnpm run typecheck
+pnpm run test
+```
 
-## Migrating Your Fork to One Canonical Manager
+## Common Failure
 
-Migrate only if your team wants a single enforced manager policy.
+`ERR_PNPM_OUTDATED_LOCKFILE`
 
-### Target: pnpm
+Fix:
 
-1. (Optional) Set `package.json -> packageManager` to pnpm version if your team wants strict enforcement
-2. Remove non-target lockfiles your team will no longer maintain
-3. Regenerate target lockfile
-4. Update CI install commands and caches for pnpm
-5. Update docs and contributing instructions
-6. Run full validation
-
-### Target: yarn
-
-1. (Optional) Set `package.json -> packageManager` to yarn version if your team wants strict enforcement
-2. Remove non-target lockfiles your team will no longer maintain
-3. Regenerate target lockfile
-4. Update CI install commands and caches for yarn
-5. Update docs and contributing instructions
-6. Run full validation
-
-### Target: bun
-
-1. (Optional) Set `package.json -> packageManager` to bun version if your team wants strict enforcement
-2. Generate and commit bun lockfile (`bun.lock` or `bun.lockb`)
-3. Update CI jobs to use bun as primary quality pipeline
-4. Update docs and contributing instructions
-5. Run full validation
-
-## Recommended Safety Checks (Any Migration)
-
-- Keep migration in a dedicated PR.
-- Include lockfile + workflow + docs updates in the same PR.
-- Ensure branch protection requires install/build checks.
-- Verify `nvm use` + CI Node version remain aligned.
-
-## Long-Term Node Policy
-
-For reproducibility over years:
-
-- Keep `.nvmrc` pinned to current tested LTS baseline.
-- Keep `engines.node` as supported compatibility range.
-- Test at least one current LTS in CI.
-- On LTS upgrades, update `.nvmrc`, CI Node version, and docs together.
+```bash
+pnpm install --lockfile-only
+git add pnpm-lock.yaml
+```

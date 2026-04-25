@@ -1,56 +1,35 @@
-# Cloud Provider Notes
+# Cloud Providers
 
-This boilerplate ships with a Docker-first deployment model.
+## Supported Targets
 
-Use these notes as starting points when running the same container on managed cloud platforms.
+This project is deployable to major providers that support Next.js and Node runtime:
 
-## Runtime Baseline
+- Vercel
+- Netlify
+- Railway
+- Render
+- Fly.io
+- Self-managed Docker hosts
 
-- Build image with Node `22.x` baseline.
-- Keep runtime aligned with `.nvmrc` and CI-tested version.
-- Use one package manager strategy per repository (default template strategy is npm).
+## Required Environment Variables
 
-## AWS
+- `DATABASE_URL`
+- `AUTH_SESSION_SECRET` or `AUTH_SESSION_SECRETS`
+- `NEXT_PUBLIC_SITE_URL`
+- `NEXT_PUBLIC_BACKEND_MODE`
+- `NEXT_PUBLIC_AUTH_PROVIDER`
 
-Recommended services:
+## Provider Checklist
 
-- ECS Fargate
-- App Runner
-- EC2 with Docker
+1. Set production environment variables
+2. Run database migrations before/with deploy
+3. Verify `/api/v1/auth/me` health through authenticated request
+4. Confirm secure cookie behavior over HTTPS
 
-Typical flow:
+## Build/Start
 
-1. Build image from `Dockerfile`.
-2. Push image to ECR.
-3. Run container on port `3000`.
-4. Configure environment variables from `.env.example`.
-5. Attach domain and TLS.
-
-## Azure
-
-Recommended services:
-
-- Azure Container Apps
-- Azure App Service (custom container)
-
-Typical flow:
-
-1. Build image from `Dockerfile`.
-2. Push image to Azure Container Registry.
-3. Run container on port `3000`.
-4. Configure environment variables from `.env.example`.
-5. Attach domain and TLS.
-
-## DigitalOcean
-
-Recommended services:
-
-- App Platform
-- Droplet with Docker
-
-Typical flow:
-
-1. Build image from `Dockerfile`.
-2. Deploy container and expose port `3000`.
-3. Configure environment variables from `.env.example`.
-4. Attach domain and TLS.
+```bash
+pnpm install --frozen-lockfile
+pnpm run build
+pnpm run start
+```

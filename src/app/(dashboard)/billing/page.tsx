@@ -1,8 +1,8 @@
 import { getTranslations } from "next-intl/server";
 
 import { EmptyState } from "@/components/common/empty-state";
-import { isFeatureEnabled } from "@/lib/config/feature-flags";
-import { BillingPanel } from "@/modules/billing/components/BillingPanel";
+import { isFeatureEnabled } from "@/lib/config/featureFlags";
+import { BillingPanel } from "@/modules/optional/billing/components/BillingPanel";
 
 export default async function BillingPage() {
   const t = await getTranslations("dashboard");

@@ -1,5 +1,5 @@
 import { API_PREFIX } from "@/lib/config/constants";
-import type { BillingSummary } from "@/modules/billing/billing.types";
+import type { BillingSummary } from "@/modules/optional/billing/billing.types";
 import { apiClient } from "@/services/apiClient";
 
 export const billingService = {

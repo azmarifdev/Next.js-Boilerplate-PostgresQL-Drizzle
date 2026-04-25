@@ -4,7 +4,7 @@ import { useTranslations } from "next-intl";
 
 import { EmptyState } from "@/components/common/empty-state";
 import { Skeleton } from "@/components/common/skeleton";
-import { useBillingSummary } from "@/modules/billing/hooks/use-billing-summary.hook";
+import { useBillingSummary } from "@/modules/optional/billing/hooks/useBillingSummary";
 
 export function BillingPanel() {
   const t = useTranslations("billing");
