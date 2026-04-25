@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.1.10](https://github.com/azmarifdev/Next.js-Boilerplate-PostgresQL-Drizzle/compare/Next.js-Boilerplate-PostgresQL-Drizzle-v0.1.9...Next.js-Boilerplate-PostgresQL-Drizzle-v0.1.10) (2026-04-25)
+
+
+### Features
+
+* **architecture:** enforce better-auth/react-query defaults with opt… ([0eebd22](https://github.com/azmarifdev/Next.js-Boilerplate-PostgresQL-Drizzle/commit/0eebd223cbf578fbdd3c0161eb42a4c2b947cc6d))
+* **architecture:** enforce better-auth/react-query defaults with optional module flags ([1529614](https://github.com/azmarifdev/Next.js-Boilerplate-PostgresQL-Drizzle/commit/15296141814222f8fe631ba0de09e3e12471a98b))
+
 ## [0.1.9](https://github.com/azmarifdev/Next.js-Boilerplate-PostgresQL-Drizzle/compare/Next.js-Boilerplate-PostgresQL-Drizzle-v0.1.8...Next.js-Boilerplate-PostgresQL-Drizzle-v0.1.9) (2026-04-25)
 
 
