@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.8](https://github.com/azmarifdev/Next.js-Boilerplate-PostgresQL-Drizzle/compare/Next.js-Boilerplate-PostgresQL-Drizzle-v0.1.7...Next.js-Boilerplate-PostgresQL-Drizzle-v0.1.8) (2026-04-25)
+
+
+### Refactoring
+
+* **dx:** simplify auth/state defaults and add dev workflows ([59f21fe](https://github.com/azmarifdev/Next.js-Boilerplate-PostgresQL-Drizzle/commit/59f21fecd4c4d1b2260c495f9f4f44cf9fcbbfd8))
+
 ## [0.1.7](https://github.com/azmarifdev/Next.js-Boilerplate-PostgresQL-Drizzle/compare/Next.js-Boilerplate-PostgresQL-Drizzle-v0.1.6...Next.js-Boilerplate-PostgresQL-Drizzle-v0.1.7) (2026-04-25)
 
 
