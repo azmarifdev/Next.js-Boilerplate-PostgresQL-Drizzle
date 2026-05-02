@@ -67,7 +67,7 @@ export function Navbar() {
   };
 
   return (
-    <header className="sticky top-0 z-30 border-b border-[var(--landing-border)] bg-[var(--landing-surface)]/92 shadow-[0_8px_24px_rgba(15,23,42,0.08)] backdrop-blur-xl">
+    <header className="landing-nav sticky top-0 z-30 border-b bg-[var(--landing-surface)]/92 backdrop-blur-xl">
       <div className="mx-auto flex min-h-16 w-full max-w-[1560px] items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
         <Link className="flex min-w-0 items-center gap-2.5" href="/">
           <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[linear-gradient(180deg,rgba(232,121,249,0.25),rgba(124,58,237,0.08))] shadow-[0_0_32px_rgba(217,70,239,0.28)]">
