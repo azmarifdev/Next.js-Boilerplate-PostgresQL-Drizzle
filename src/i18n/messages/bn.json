@@ -11,6 +11,7 @@
     "titleSuffix": "স্টার্টার টেমপ্লেট",
     "subtitle": "PostgreSQL ও Drizzle ORM সহ একটি production-ready Next.js Boilerplate। SaaS, dashboard এবং modern web app দ্রুত launch করার জন্য clean code, scalable architecture ও developer-friendly tooling সহ তৈরি।",
     "signIn": "সাইন ইন",
+    "signOut": "সাইন আউট",
     "getStarted": "শুরু করুন",
     "badge": "By A. Z. M. Arif • Full Stack Software Developer",
     "meta": "azmarif.dev · @azmarifdev",

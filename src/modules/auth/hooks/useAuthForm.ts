@@ -58,7 +58,7 @@ export function useAuthForm({ mode }: UseAuthFormOptions) {
         "success",
         mode === "login" ? "Signed in successfully" : "Account created successfully"
       );
-      router.push(response.user.mfaRequired ? "/dashboard?mfa=required" : "/dashboard");
+      router.push("/docs");
       router.refresh();
     },
     onError: (error) => {

@@ -69,7 +69,7 @@ export async function Hero() {
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
           <Link
             className="group inline-flex min-w-[190px] items-center justify-center gap-2.5 rounded-2xl bg-[linear-gradient(135deg,#8b3dff_0%,#d946ef_48%,#fb7185_100%)] px-6 py-3 text-base font-semibold text-white shadow-[0_0_0_1px_rgba(255,255,255,0.06),0_14px_38px_rgba(217,70,239,0.32)] transition duration-200 hover:-translate-y-0.5 hover:shadow-[0_18px_46px_rgba(236,72,153,0.4)]"
-            href="/register"
+            href="/docs"
           >
             {t("getStarted")}
             <MoveRight className="h-4 w-4 transition duration-200 group-hover:translate-x-1" />

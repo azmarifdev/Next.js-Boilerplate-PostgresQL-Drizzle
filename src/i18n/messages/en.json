@@ -11,6 +11,7 @@
     "titleSuffix": "Next.js-Boilerplate-PostgresQL-Drizzle",
     "subtitle": "A production-ready Next.js Boilerplate with PostgreSQL & Drizzle ORM. Built for SaaS, dashboards, and modern web apps. Launch faster with clean code, scalable architecture, and developer-friendly tooling.",
     "signIn": "Sign in",
+    "signOut": "Sign out",
     "getStarted": "Get Started",
     "badge": "By A. Z. M. Arif • Full Stack Software Developer",
     "meta": "azmarif.dev · @azmarifdev",

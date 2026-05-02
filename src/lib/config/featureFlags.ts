@@ -2,8 +2,6 @@ import { appConfig } from "@/lib/config/app-config";
 
 export type FeatureFlag =
   | "ENABLE_ADMIN"
-  | "ENABLE_ECOMMERCE"
-  | "ENABLE_BILLING"
   | "ENABLE_CUSTOM_AUTH"
   | "ALLOW_DEMO_AUTH"
   | "ALLOW_INSECURE_DEV_AUTH";
@@ -18,8 +16,6 @@ export interface FeatureFlagDefinition {
 
 export const featureFlagDefinitions: FeatureFlagDefinition[] = [
   { key: "ENABLE_CUSTOM_AUTH", label: "Optional Custom Auth Module", category: "auth-modes" },
-  { key: "ENABLE_ECOMMERCE", label: "Optional Ecommerce Module", category: "optional-modules" },
-  { key: "ENABLE_BILLING", label: "Optional Billing Module", category: "optional-modules" },
   { key: "ENABLE_ADMIN", label: "Admin Module", category: "optional-modules" },
   { key: "ALLOW_DEMO_AUTH", label: "Demo Auth", category: "dev-features" },
   { key: "ALLOW_INSECURE_DEV_AUTH", label: "Insecure Dev Auth", category: "dev-features" }
@@ -30,8 +26,6 @@ export type FeatureFlags = Record<FeatureFlag, boolean>;
 export function getFeatureFlags(): FeatureFlags {
   return {
     ENABLE_ADMIN: appConfig.features.admin,
-    ENABLE_ECOMMERCE: appConfig.features.ecommerce,
-    ENABLE_BILLING: appConfig.features.billing,
     ENABLE_CUSTOM_AUTH:
       process.env.NEXT_PUBLIC_ENABLE_CUSTOM_AUTH === "true" ||
       process.env.ENABLE_CUSTOM_AUTH === "true",

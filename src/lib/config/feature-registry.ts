@@ -16,18 +16,6 @@ export const featureRegistry: FeatureDefinition[] = [
     permission: "users:read",
     navLabelKey: "usersNav",
     requiresRole: "admin"
-  },
-  {
-    key: "ENABLE_ECOMMERCE",
-    route: "/ecommerce",
-    permission: "ecommerce:read",
-    navLabelKey: "ecommerceNav"
-  },
-  {
-    key: "ENABLE_BILLING",
-    route: "/billing",
-    permission: "billing:read",
-    navLabelKey: "billingNav"
   }
 ];
 
