@@ -1,14 +1,22 @@
 import { MoveRight } from "lucide-react";
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
+import {
+  SiDrizzle,
+  SiNextdotjs,
+  SiPostgresql,
+  SiShadcnui,
+  SiTailwindcss,
+  SiTypescript
+} from "react-icons/si";
 
 const stackItems = [
-  "Next.js 14+",
-  "PostgreSQL",
-  "Drizzle ORM",
-  "TypeScript",
-  "Tailwind CSS",
-  "Shadcn UI"
+  { name: "Next.js 14+", icon: SiNextdotjs, color: "#000000" },
+  { name: "PostgreSQL", icon: SiPostgresql, color: "#4169E1" },
+  { name: "Drizzle ORM", icon: SiDrizzle, color: "#C5F74F" },
+  { name: "TypeScript", icon: SiTypescript, color: "#3178C6" },
+  { name: "Tailwind CSS", icon: SiTailwindcss, color: "#06B6D4" },
+  { name: "Shadcn UI", icon: SiShadcnui, color: "#000000" }
 ];
 
 export async function Hero() {
@@ -69,7 +77,7 @@ export async function Hero() {
 
           <a
             className="inline-flex min-w-[200px] items-center justify-center gap-2.5 rounded-2xl bg-[var(--landing-surface)] px-6 py-3 text-base font-semibold text-[var(--landing-text-strong)] shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] backdrop-blur-md transition duration-200 hover:bg-white/[0.06]"
-            href="https://github.com/azmarifdev/next-js-boilerplate-postgresql-drizzle"
+            href="https://github.com/azmarifdev/Next.js-Boilerplate-PostgresQL-Drizzle"
             target="_blank"
             rel="noreferrer"
           >
@@ -84,15 +92,15 @@ export async function Hero() {
           id="stack"
           className="mt-8 flex w-full flex-wrap items-center justify-center gap-2.5 lg:gap-3"
         >
-          {stackItems.map((item) => (
+          {stackItems.map(({ name, icon: Icon, color }) => (
             <div
-              key={item}
+              key={name}
               className="inline-flex h-12 items-center justify-center rounded-2xl bg-[var(--landing-surface-soft)] px-4 text-sm font-medium text-[var(--landing-text)] shadow-[0_8px_24px_rgba(15,23,42,0.08),inset_0_1px_0_rgba(255,255,255,0.12)] backdrop-blur-md"
             >
-              <span className="mr-2.5 inline-flex h-4 w-4 items-center justify-center rounded-full bg-white/[0.03] text-[9px] text-[var(--landing-soft)]">
-                {item.slice(0, 1)}
+              <span className="mr-2.5 inline-flex h-5 w-5 items-center justify-center">
+                <Icon style={{ color }} className="h-full w-full" />
               </span>
-              {item}
+              {name}
             </div>
           ))}
         </div>
