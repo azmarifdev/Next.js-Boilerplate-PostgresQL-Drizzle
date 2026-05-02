@@ -8,25 +8,25 @@ test("home page loads", async ({ page }) => {
   await expect(page.getByRole("link", { name: /sign in/i })).toBeVisible();
 });
 
-test("protected routes require auth", async ({ page }) => {
-  await page.goto("/dashboard");
-  await expect(page).toHaveURL(/\/login$/);
-});
-
-test("authenticated user can access dashboard", async ({ page }) => {
+test("authenticated user can access docs after login", async ({ page }) => {
   await page.goto("/login");
   await page.locator("input[type='email']").fill("nextjs.boilerplate@azmarif.dev");
   await page.locator("input[type='password']").fill("azmarifdev");
   await page.getByRole("button", { name: /sign in|login/i }).click();
 
-  await expect(page).toHaveURL(/\/dashboard$/);
-  await expect(page.getByRole("heading", { name: /dashboard overview/i })).toBeVisible();
+  await expect(page).toHaveURL(/\/docs$/);
+  await expect(page.getByText(/docs journal|ডকস জার্নাল/i)).toBeVisible();
 });
 
-test("feature routes require auth", async ({ page }) => {
-  await page.goto("/ecommerce");
-  await expect(page).toHaveURL(/\/login$/);
+test("signed-in users get redirected from login to docs", async ({ page }) => {
+  // First login
+  await page.goto("/login");
+  await page.locator("input[type='email']").fill("nextjs.boilerplate@azmarif.dev");
+  await page.locator("input[type='password']").fill("azmarifdev");
+  await page.getByRole("button", { name: /sign in|login/i }).click();
+  await expect(page).toHaveURL(/\/docs$/);
 
-  await page.goto("/billing");
-  await expect(page).toHaveURL(/\/login$/);
+  // Try going back to login - should redirect to docs
+  await page.goto("/login");
+  await expect(page).toHaveURL(/\/docs$/);
 });

@@ -66,9 +66,8 @@ describe("mode guards", () => {
     );
   });
 
-  it("redirects admin to dashboard when step-up is required for /users", async () => {
+  it("redirects signed-in users from /login to /docs", async () => {
     process.env.NEXT_PUBLIC_BACKEND_MODE = "internal";
-    process.env.REQUIRE_ADMIN_STEP_UP_AUTH = "true";
     process.env.AUTH_SESSION_SECRET = "integration-secret";
 
     const { createSessionToken } = await import("@/lib/auth/session");
@@ -77,15 +76,15 @@ describe("mode guards", () => {
 
     const token = await createSessionToken(
       {
-        sub: "u_admin",
-        name: "Admin",
-        email: "nextjs.boilerplate@azmarif.dev",
-        role: "admin",
+        sub: "u_user",
+        name: "User",
+        email: "user@test.com",
+        role: "user",
         mfaVerified: false
       },
       3600
     );
-    const request = new NextRequest("http://localhost/users", {
+    const request = new NextRequest("http://localhost/login", {
       headers: {
         cookie: `auth_token=${token}`
       }
@@ -93,6 +92,6 @@ describe("mode guards", () => {
 
     const response = await proxy(request);
     expect(response.status).toBe(307);
-    expect(response.headers.get("location")).toBe("http://localhost/dashboard?mfa=required");
+    expect(response.headers.get("location")).toBe("http://localhost/docs");
   });
 });

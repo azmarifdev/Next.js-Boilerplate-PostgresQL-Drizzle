@@ -7,8 +7,6 @@ export type DbProvider = "postgres";
 export type AuthProvider = "better-auth" | "custom-auth";
 
 interface FeatureConfig {
-  ecommerce: boolean;
-  billing: boolean;
   admin: boolean;
 }
 
@@ -48,14 +46,6 @@ export const appConfig: AppConfig = {
   dbProvider: "postgres",
   authProvider: parseAuthProvider(process.env.NEXT_PUBLIC_AUTH_PROVIDER),
   features: {
-    ecommerce: parseBoolean(
-      process.env.NEXT_PUBLIC_ENABLE_ECOMMERCE ?? process.env.ENABLE_ECOMMERCE,
-      false
-    ),
-    billing: parseBoolean(
-      process.env.NEXT_PUBLIC_ENABLE_BILLING ?? process.env.ENABLE_BILLING,
-      false
-    ),
     admin: parseBoolean(process.env.NEXT_PUBLIC_FEATURE_ADMIN, true)
   },
   auth: {

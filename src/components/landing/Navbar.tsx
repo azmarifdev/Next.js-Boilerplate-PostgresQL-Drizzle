@@ -1,11 +1,12 @@
 "use client";
 
-import { Moon, Sun, Zap } from "lucide-react";
+import { LogOut, Moon, Sun, Zap } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
 
+import { useAuth } from "@/hooks/useAuth";
 import { useAppTheme } from "@/providers/theme.provider";
 
 const navItems = [
@@ -18,6 +19,7 @@ export function Navbar() {
   const locale = useLocale();
   const router = useRouter();
   const { theme, setTheme } = useAppTheme();
+  const { isAuthenticated, logout, isLoggingOut } = useAuth();
   const [isLangAnimating, setIsLangAnimating] = useState(false);
   const [isThemeAnimating, setIsThemeAnimating] = useState(false);
   const langAnimationTimeoutRef = useRef<number | null>(null);
@@ -155,19 +157,37 @@ export function Navbar() {
             </span>
           </button>
 
-          <Link
-            className="hidden rounded-2xl bg-[var(--landing-surface-soft)] px-4 py-2.5 text-sm font-medium text-[var(--landing-text-strong)] shadow-[0_8px_20px_rgba(15,23,42,0.10),inset_0_1px_0_rgba(255,255,255,0.20)] transition duration-200 hover:bg-white/[0.06] md:inline-flex"
-            href="/login"
-          >
-            {t("signIn")}
-          </Link>
+          {isAuthenticated ? (
+            <button
+              type="button"
+              onClick={async () => {
+                await logout();
+                router.push("/");
+                router.refresh();
+              }}
+              disabled={isLoggingOut}
+              className="inline-flex items-center justify-center gap-2 rounded-2xl bg-[var(--landing-surface-soft)] px-5 py-2.5 text-sm font-medium text-[var(--landing-text-strong)] shadow-[0_8px_20px_rgba(15,23,42,0.10),inset_0_1px_0_rgba(255,255,255,0.20)] transition duration-200 hover:bg-white/[0.06]"
+            >
+              <LogOut className="h-4 w-4" />
+              {t("signOut")}
+            </button>
+          ) : (
+            <>
+              <Link
+                className="hidden rounded-2xl bg-[var(--landing-surface-soft)] px-4 py-2.5 text-sm font-medium text-[var(--landing-text-strong)] shadow-[0_8px_20px_rgba(15,23,42,0.10),inset_0_1px_0_rgba(255,255,255,0.20)] transition duration-200 hover:bg-white/[0.06] md:inline-flex"
+                href="/login"
+              >
+                {t("signIn")}
+              </Link>
 
-          <Link
-            className="inline-flex items-center justify-center rounded-2xl bg-[linear-gradient(135deg,#9b3dff_0%,#d946ef_40%,#fb7185_100%)] px-5 py-2.5 text-sm font-semibold text-white shadow-[0_12px_30px_rgba(217,70,239,0.36)] transition duration-200 hover:scale-[1.01] hover:shadow-[0_16px_36px_rgba(236,72,153,0.40)] sm:px-6"
-            href="/register"
-          >
-            {t("getStarted")}
-          </Link>
+              <Link
+                className="inline-flex items-center justify-center rounded-2xl bg-[linear-gradient(135deg,#9b3dff_0%,#d946ef_40%,#fb7185_100%)] px-5 py-2.5 text-sm font-semibold text-white shadow-[0_12px_30px_rgba(217,70,239,0.36)] transition duration-200 hover:scale-[1.01] hover:shadow-[0_16px_36px_rgba(236,72,153,0.40)] sm:px-6"
+                href="/register"
+              >
+                {t("getStarted")}
+              </Link>
+            </>
+          )}
         </div>
       </div>
     </header>

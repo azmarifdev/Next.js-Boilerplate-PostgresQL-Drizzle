@@ -19,6 +19,6 @@ test.describe("Sanity", () => {
 
     const sitemap = await page.request.get("/sitemap.xml");
     expect(sitemap.ok()).toBeTruthy();
-    await expect.soft(sitemap.text()).resolves.toContain("/dashboard");
+    await expect.soft(sitemap.text()).resolves.toContain("/docs");
   });
 });
