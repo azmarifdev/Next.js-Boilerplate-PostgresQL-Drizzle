@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.1.21](https://github.com/azmarifdev/Next.js-Boilerplate-PostgresQL-Drizzle/compare/v0.1.20...v0.1.21) (2026-05-03)
+
+
+### Bug Fixes
+
+* **ci:** replace raw HTML with markdown in release contributors section ([e292c4e](https://github.com/azmarifdev/Next.js-Boilerplate-PostgresQL-Drizzle/commit/e292c4ec6cfbe99455516c4a2f15d955a305c5d9))
+
+
+### Documentation
+
+* **project:** add contributing guide and security policy to docs folder ([c6e6ad3](https://github.com/azmarifdev/Next.js-Boilerplate-PostgresQL-Drizzle/commit/c6e6ad3c378f0eff38fe3235d50f39895e5d79e3))
+* **project:** fix release contributors markup, organize docs, expand guides ([4392c9b](https://github.com/azmarifdev/Next.js-Boilerplate-PostgresQL-Drizzle/commit/4392c9bcdaf8d8325a61745720fc43fa9aee5e14))
+* **project:** remove root md files, now served from docs/ ([90236b6](https://github.com/azmarifdev/Next.js-Boilerplate-PostgresQL-Drizzle/commit/90236b676ed6fa3a84afeccc4627a2b27a087dce))
+* **readme:** update links to reflect new doc organization ([3d90185](https://github.com/azmarifdev/Next.js-Boilerplate-PostgresQL-Drizzle/commit/3d90185de72732654d06f0336c328956e2898591))
+
 ## [0.1.20](https://github.com/azmarifdev/Next.js-Boilerplate-PostgresQL-Drizzle/compare/v0.1.19...v0.1.20) (2026-05-03)
 
 
