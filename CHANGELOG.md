@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.1.20](https://github.com/azmarifdev/Next.js-Boilerplate-PostgresQL-Drizzle/compare/v0.1.19...v0.1.20) (2026-05-03)
+
+
+### Documentation
+
+* **project:** expand all English docs, rewrite README with professio… ([700d892](https://github.com/azmarifdev/Next.js-Boilerplate-PostgresQL-Drizzle/commit/700d892860ab3a52b637ca84c82cdc562b590549))
+* **project:** expand all English docs, rewrite README with professional content ([17517b6](https://github.com/azmarifdev/Next.js-Boilerplate-PostgresQL-Drizzle/commit/17517b61e0a9a5adac30bc6471b87a2fa9024082))
+
 ## [0.1.19](https://github.com/azmarifdev/Next.js-Boilerplate-PostgresQL-Drizzle/compare/v0.1.18...v0.1.19) (2026-05-03)
 
 
