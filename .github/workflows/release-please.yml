@@ -18,6 +18,7 @@ permissions:
 jobs:
   release-please:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     outputs:
       release_created: ${{ steps.release.outputs.release_created }}
       prs_created: ${{ steps.release.outputs.prs_created }}
@@ -48,11 +49,26 @@ jobs:
               return;
             }
 
-            const { data: release } = await github.rest.repos.getReleaseByTag({
-              owner,
-              repo,
-              tag
-            });
+            let release;
+            for (let attempt = 1; attempt <= 5; attempt += 1) {
+              try {
+                const response = await github.rest.repos.getReleaseByTag({
+                  owner,
+                  repo,
+                  tag
+                });
+                release = response.data;
+                break;
+              } catch (error) {
+                const isLastAttempt = attempt === 5;
+                if (isLastAttempt) {
+                  throw error;
+                }
+                const delayMs = attempt * 2000;
+                core.warning(`Release ${tag} is not yet available (attempt ${attempt}/5). Retrying in ${delayMs}ms.`);
+                await new Promise((resolve) => setTimeout(resolve, delayMs));
+              }
+            }
 
             const existingBody = release.body || "";
 
