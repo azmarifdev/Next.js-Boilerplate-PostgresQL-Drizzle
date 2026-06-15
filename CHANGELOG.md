@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.1.55](https://github.com/azmarifdev/Next.js-Boilerplate-PostgresQL-Drizzle/compare/v0.1.54...v0.1.55) (2026-06-15)
+
+
+### Bug Fixes
+
+* **deps:** bump the prod-dependencies group across 1 directory with 6 updates ([f2cbcc0](https://github.com/azmarifdev/Next.js-Boilerplate-PostgresQL-Drizzle/commit/f2cbcc09a5d158540bb26db0572caa83abb6488f))
+* **deps:** bump the prod-dependencies group across 1 directory with 6 updates ([a5752ee](https://github.com/azmarifdev/Next.js-Boilerplate-PostgresQL-Drizzle/commit/a5752ee4418158a10269bd6ead5d9b697584ce37))
+
 ## [0.1.54](https://github.com/azmarifdev/Next.js-Boilerplate-PostgresQL-Drizzle/compare/v0.1.53...v0.1.54) (2026-06-15)
 
 
