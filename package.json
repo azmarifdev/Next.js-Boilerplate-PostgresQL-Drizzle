@@ -63,7 +63,7 @@
     "drizzle-orm": "^0.45.2",
     "lucide-react": "^1.18.0",
     "marked": "^18.0.5",
-    "next": "^16.2.9",
+    "next": "^16.2.11",
     "next-intl": "^4.13.0",
     "nodemailer": "^9.0.1",
     "pg": "^8.21.0",
